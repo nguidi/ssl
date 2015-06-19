@@ -74,7 +74,7 @@ document.querySelector('#analizar')
 					}
 				)
 
-			console.log(arrayDeTokens)
+			console.log(arrayDeTokens.join(''))
 
 			document.querySelector('#salidaSinFormato').innerHTML = arrayDeTokens.join('')
 		}
