@@ -3,28 +3,31 @@ function obtenerTokens(cadenaDeEntrada)
 {
 	//	Expresion regular para la deteccion de palabras reservadas
 	var	palabraReservada
-	=	new RegExp(/\b(Para|desde|hasta|Si|entonces|return|NO|Y|O)\b/g)
+	=	new RegExp(/\b(Para|desde|hasta|Si|entonces|return|NO|Y|O)\b/)
 	//	Expresion regular para la detecion de tipo de datos
 	,	tipoDeDato
-	=	new RegExp(/\b(entero|logica)\b/g)
+	=	new RegExp(/\b(entero|logica)\b/)
 	//	Expresion regular para las constantes enteras
 	,	constanteEntera
 	=	new RegExp(/\d+/g)
 	//	Expresion regular para las constantes logicas
 	,	constanteLogica
-	=	new RegExp(/\b(VERDADERO|FALSO)\b/g)
+	=	new RegExp(/\b(VERDADERO|FALSO)\b/)
 	//	Expresion regular para los nombres de las variables
 	,	nombreVariable
-	=	new RegExp(/([a-z]+)/g)
+	=	new RegExp(/\b([a-z]+)\b/)
 	//	Expresion regular para los nombres de las funciones
 	,	nombreFuncion
-	=	new RegExp(/([A-Z][a-z]*)/g)
+	=	new RegExp(/\b([A-Z][a-z]*)\b/)
 	//	Expresion regular para los operadores logicos
 	,	operadorLogico
-	=	new RegExp(/\b(==|>=|<=|>|<)\b/g)
+	=	new RegExp(/\b(==|>=|<=|>|<)\b/)
 	//	Expresion regular para los operadores aritmeticos
 	,	operadorAritmetico
-	=	new RegExp(/\+\-\*\//g)
+	=	new RegExp(/(\+|\-|\*|\/)/)
+	//	Simbolos terminales que no se clasifican en ninguna expresion regular anterior
+	,	simbolosTerminales
+	=	new RegExp(/(;|,|\(|\)|\{|\}|=)/)
 
 	//	La variable salida contendra los tokens generados. La inicializo vacia.
 	var	salida
@@ -57,7 +60,7 @@ function obtenerTokens(cadenaDeEntrada)
 	=	separadoYTrimeado.map(
 			function(preToken)
 			{
-				return	palabraReservada.test(preToken)
+				return	(palabraReservada.test(preToken) || simbolosTerminales.test(preToken))
 					?	'<'+preToken+'>'
 					:	tipoDeDato.test(preToken)
 					?	'<Tipo>'
@@ -73,7 +76,7 @@ function obtenerTokens(cadenaDeEntrada)
 					?	'<OperadorLogico>'
 					:	operadorAritmetico.test(preToken)
 					?	'<OperadorAritmetico>'
-					:	'<'+preToken+'>'
+					:	'<error>'
 			}
 		)
 
@@ -101,8 +104,6 @@ document.querySelector('button#analizar')
 			//	Inserto la cadena
 			document.querySelector('#salidaSinFormato').innerHTML = cadenaDeTokens
 
-			console.log(arrayDeTokens)
-
 			var	arrayConFormato
 			=	arrayDeTokens.map(
 					function(token)
@@ -112,13 +113,27 @@ document.querySelector('button#analizar')
 
 						span.appendChild(document.createTextNode(token))
 
-						span.setAttribute('class','c')
+						span
+							.setAttribute(
+								'class'
+							,		(/Tipo/g.test(token))
+								?	'cp'
+								:	(/(ConstanteEntera|ConstanteLogica)/g.test(token))
+								?	'nt'
+								:	(/(NombreFuncion|NombreVariable)/g.test(token))
+								?	'na'
+								:	(/(OperadorLogico|OperadorAritmetico)/g.test(token))
+								?	'c'
+								:	's'
+							)	
+
+						if	(/(;|\{|\})/g.test(token))
+							span.appendChild(document.createElement("BR"))
 
 						return	span.outerHTML
 					}
 				)
 
-			console.log(arrayConFormato)
 			//	Inserto la cadena
 			document.querySelector('#salidaConFormato').innerHTML = arrayConFormato.join('')
 		}

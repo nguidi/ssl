@@ -20,12 +20,15 @@
 			pre {
 				height: 390px;
 				margin: 0;
-			}	
+			}
+			.highlight {
+				margin-bottom: 0px;
+			}
 			.panel-body button {
 				margin-top: 10px;
 			}
 			.panel-body textarea {
-				height: 346px;
+				height: 366px;
 			}
 		</style>
 	</head>
@@ -44,27 +47,29 @@
 						</div>
 						<div class="panel-body">
 							<textarea class="form-control" rows="3" id="entrada">
-entero sum;
-entero i;
-logica log;
+entero a;
+entero b;
+entero s = a + b;
 
-logica Soniguales(entero a, real b){
-  logica iguales;
-  iguales = FALSO;
-  Si (a-b) == 0 O (b-a) == 0 entonces{
-    iguales = VERDADERO;
-  }
-  return iguales;
+entero Multiplicar(s) {
+   return s * 2;
+} 
+
+Si ( s >= 5 ) entonces {
+   s = multiplicar(s);
 }
 
-sum = 0;
-Para i desde 0 hasta 15{
-  Si i >= 5 entonces{
-    sum = sum+1;
-  }
+logica x = FALSO;
+
+Si (VERDADERO == x) Y (FALSO == FALSO) {
+   logica = FALSO;
 }
 
-Mostrar(Soniguales(3,4));
+entero suma;
+
+Para s desde 0 hasta 10 {
+   suma = suma + s;
+}
 							</textarea>
 							<button class="btn btn-primary pull-right" id="analizar">Analizar</button>
 						</div>
