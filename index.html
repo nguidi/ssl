@@ -5,27 +5,27 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>SSL: Analizador Lexicografico</title>
-
+		<link href="bootstrap/css/docs.min.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 		<style type="text/css">
+			textarea {
+				resize: none;
+			}
 			xmp.well {
 				overflow-y: auto;
 				min-height: 75px;
+				margin: 0px;
 			}
 			pre {
-				height: 205px;
+				height: 390px;
 				margin: 0;
-			}
-			.panel-body,
-			.list-group {
-				height: 420px;
-			}			
+			}	
 			.panel-body button {
 				margin-top: 10px;
 			}
 			.panel-body textarea {
-				height: 344px;
+				height: 346px;
 			}
 		</style>
 	</head>
@@ -43,7 +43,29 @@
 							</h3>
 						</div>
 						<div class="panel-body">
-							<textarea class="form-control" rows="3" id="entrada"></textarea>
+							<textarea class="form-control" rows="3" id="entrada">
+entero sum;
+entero i;
+logica log;
+
+logica Soniguales(entero a, real b){
+  logica iguales;
+  iguales = FALSO;
+  Si (a-b) == 0 O (b-a) == 0 entonces{
+    iguales = VERDADERO;
+  }
+  return iguales;
+}
+
+sum = 0;
+Para i desde 0 hasta 15{
+  Si i >= 5 entonces{
+    sum = sum+1;
+  }
+}
+
+Mostrar(Soniguales(3,4));
+							</textarea>
 							<button class="btn btn-primary pull-right" id="analizar">Analizar</button>
 						</div>
 					</div>
@@ -52,38 +74,32 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								Salida
+								Salida con formato
 							</h3>
 						</div>
-						<ul class="list-group">
-							<li class="list-group-item">
-								<h5>
-									<u>Sin Formato</u>
-								</h5>
-								<xmp id="salidaSinFormato" class="well"></xmp>
-							</li>
-							<li class="list-group-item">
-								<h5>
-									<u>
-										Con Formato
-									</u>
-								</h5>
-								<pre id="salidaConFormato" >
-									<code data-lang="html"></code>
+						<div class="panel-body">
+							<div class="highlight">
+								<pre>
+									<code id="salidaConFormato" class="language-html" data-lang="html"></code>
 								</pre>
-							</li>
-						</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								Salida sin formato
+							</h3>
+						</div>
+						<div class="panel-body">
+							<xmp id="salidaSinFormato" class="well"></xmp>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<nav class="navbar navbar-default navbar-fixed-bottom">
-			<div class="container">
-				<p class"text-center">
-					Guidi Neri
-				</p>
-			</div>
-		</nav>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
