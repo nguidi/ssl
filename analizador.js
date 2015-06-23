@@ -6,7 +6,7 @@ function obtenerTokens(cadenaDeEntrada)
 	=	new RegExp(/\b(Para|desde|hasta|Si|entonces|return|NO|Y|O)\b/)
 	//	Expresion regular para la detecion de tipo de datos
 	,	tipoDeDato
-	=	new RegExp(/\b(entero|logica)\b/)
+	=	new RegExp(/\b(entero|real|logica)\b/)
 	//	Expresion regular para las constantes enteras
 	,	constanteEntera
 	=	new RegExp(/\d+/g)
@@ -60,7 +60,12 @@ function obtenerTokens(cadenaDeEntrada)
 	=	separadoYTrimeado.map(
 			function(preToken)
 			{
-				return	(palabraReservada.test(preToken) || simbolosTerminales.test(preToken))
+				return	(
+							palabraReservada.test(preToken)
+						||	simbolosTerminales.test(preToken)
+						||	operadorLogico.test(preToken)
+						||	operadorAritmetico.test(preToken)
+						)
 					?	'<'+preToken+'>'
 					:	tipoDeDato.test(preToken)
 					?	'<Tipo>'
@@ -72,11 +77,7 @@ function obtenerTokens(cadenaDeEntrada)
 					?	'<NombreFuncion>'
 					:	nombreVariable.test(preToken)
 					?	'<NombreVariable>'
-					:	operadorLogico.test(preToken)
-					?	'<OperadorLogico>'
-					:	operadorAritmetico.test(preToken)
-					?	'<OperadorAritmetico>'
-					:	'<error>'
+					:	'<desconocido>'
 			}
 		)
 
