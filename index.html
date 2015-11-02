@@ -56,7 +56,7 @@ entero Multiplicar(s) {
 } 
 
 Si ( s >= 5 ) entonces {
-   s = multiplicar(s);
+   s = Multiplicar(s);
 }
 
 logica x = FALSO;
@@ -75,7 +75,7 @@ Para s desde 0 hasta 10 {
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-xs-12">
+				<div class="col-md-6 col-xs-12 output">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">
@@ -91,7 +91,7 @@ Para s desde 0 hasta 10 {
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12 col-xs-12">
+				<div class="col-md-12 col-xs-12 output">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">
@@ -105,7 +105,9 @@ Para s desde 0 hasta 10 {
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="analizador.js"></script>
+		<script type="text/javascript" src="gramatica.js"></script>
+		<script type="text/javascript" src="lexer.js"></script>
+		<script type="text/javascript" src="adsr.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

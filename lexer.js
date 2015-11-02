@@ -1,5 +1,5 @@
 //	Obtiene los tokens a partir de una cadena de entrada
-function obtenerTokens(cadenaDeEntrada)
+function lexer(cadenaDeEntrada)
 {
 	//	Expresion regular para la deteccion de palabras reservadas
 	var	palabraReservada
