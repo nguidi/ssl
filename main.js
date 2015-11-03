@@ -21,27 +21,27 @@ document.querySelector('button#analizar')
 
 			//	Obtengo la cadena de entrada
 			var	entrada
-			=	document.querySelector('#entrada').value
+			=	document.querySelector('#entrada').value;
 			
 			//	Obtengo los tokens
 			var	arrayDeTokens
-			=	lexer(entrada)
+			=	lexer(entrada);
 
 			//	Realizo la union entre los elementos del array generando una cadena
 			var	cadenaDeTokens
-			=	arrayDeTokens.join('')
+			=	arrayDeTokens.join('');
 
 			//	Inserto la cadena
-			document.querySelector('#salidaSinFormato').innerHTML = cadenaDeTokens
+			document.querySelector('#salidaSinFormato').innerHTML = cadenaDeTokens;
 
 			var	arrayConFormato
 			=	arrayDeTokens.map(
 					function(token)
 					{
 						var	span
-						=	document.createElement("SPAN")
+						=	document.createElement("SPAN");
 
-						span.appendChild(document.createTextNode(token))
+						span.appendChild(document.createTextNode(token));
 
 						span
 							.setAttribute(
@@ -55,17 +55,17 @@ document.querySelector('button#analizar')
 								:	(/(OperadorLogico|OperadorAritmetico)/g.test(token))
 								?	'c'
 								:	's'
-							)	
+							);
 
 						if	(/(;|\{|\})/g.test(token))
-							span.appendChild(document.createElement("BR"))
+							span.appendChild(document.createElement("BR"));
 
-						return	span.outerHTML
+						return	span.outerHTML;
 					}
 				)
 
 			//	Inserto la cadena
-			document.querySelector('#salidaConFormato').innerHTML = arrayConFormato.join('')
+			document.querySelector('#salidaConFormato').innerHTML = arrayConFormato.join('');
 
 			//	Obtengo la cadena de entrada como un array
 			var	cadenaDeEntrada
@@ -77,9 +77,16 @@ document.querySelector('button#analizar')
 						auxArray.pop();
 						return	auxArray.join('');
 					}
-				)
+				);
+
+			//	Obtengo si es cadena o no del lenguaje
+			var esCadena
+			=	adsr(cadenaDeEntrada);
 
 			//	Cambio el estado de los paneles al estado correspondiendte
-			cambiarEstadoDelPanel(panelesDeSalida, 'panel-' + (adsr(cadenaDeEntrada) ? 'success' : 'danger'));
+			cambiarEstadoDelPanel(panelesDeSalida, 'panel-' + (esCadena ? 'success' : 'danger'));
+
+			//	Muestro si pertence o no al lenguaje
+			document.querySelector('#estadoADSR').innerHTML = (esCadena ? 'Pertence' : 'No pertence') + ' al L(G).';
 		}
 	) 

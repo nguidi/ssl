@@ -2,22 +2,32 @@
 GRAMATICA
 =	{
 	/* -------------------- CONJUNTO DE NO TERMINALES DE LA GRAMATICA ---------------------------------------------- */
+	/*	Solo Grupo 3
 		NO_TERMINALES:			["P", "DV", "DF", "LP", "LPCont", "LC", "CAsignacion", "CPara", "CSiEntonces",
 								 "CLLamadoFuncion", "LLPar", "LLParCont", "ExpEntera", "ExpEnteraSRI", "Termino",
 								  "TerminoSRI", "Factor", "ExpLogica", "ExpLogicaSRI", "OperandoLogico",
 								  "OperandoLogicoSRI", "FactorLogico", "Comparacion", "Operador"]
-	
+	*/
+		NO_TERMINALES:			["P", "ExpEntera", "ExpEnteraSRI", "Termino", "TerminoSRI", "Factor", "ExpLogica",
+								 "ExpLogicaSRI", "OperandoLogico", "OperandoLogicoSRI", "FactorLogico", "Comparacion",
+								 "Operador"]
+
 	/* -------------------- CONJUNTO DE TERMINALES DE LA GRAMATICA ------------------------------------------------- */
+	/*	Solo Grupo 3
 	,	TERMINALES:				["(", ")", "{", "}", "+", "*", "-", "O", "Y", "NO", "ConstanteEntera", "ConstanteLogica",
 								 "NombreFuncion", "NombreVariable", "Para", "desde", "hasta", "Si", "entonces", "=", "==",
 								 "<", ">", ">=", "<=", ";", ",", "return", "Tipo"]
-	
+	*/
+	,	TERMINALES:				["(", ")", "{", "}", "+", "*", "-", "O", "Y", "NO", "ConstanteEntera", "ConstanteLogica",
+								 "==", "<", ">", ">=", "<=", ";", "NombreVariable"]
+
 	/* -------------------- SIMBOLO DISTINGUIDO DE LA GRAMATICA ---------------------------------------------------- */
 	,	SIMBOLO_DISTINGUIDO:	"P"
 	
 	/* -------------------- CONJUNTO DE PRODUCCIONES DE LA GRAMATICA ----------------------------------------------- */
 	,	PRODUCCIONES:
 		{
+			/*	Solo Grupo 3
 			"P":					[
 										["DV", "DF", "LC"]
 									,	["DV", "DF"]
@@ -26,7 +36,7 @@ GRAMATICA
 									,	["DV"]
 									,	["DF"]
 									,	["LC"]
-									,	[""]
+									,	[]
 									]
 		,	"DV":					[
 										["Tipo", "NombreVariable", ";", "DV"]
@@ -76,13 +86,21 @@ GRAMATICA
 										["NombreVariable", ",", "LLParCont"]
 									,	["NombreVariable"]
 									]
-		/*
+		*/
+		/*	Recursiva izquierda
 		,	"ExpEntera":		[
 									["ExpEntera", "+", "Termino"]
 								,	["ExpEntera", "-", "Termino"]
 								,	["Termino"]
 								]
 		*/
+			"P":					[
+										["ExpEntera", ";", "P"]
+									,	["ExpEntera", ";"]
+									,	["ExpLogica", ";", "P"]
+									,	["ExpLogica", ";"]
+									] 
+
 		,	"ExpEntera":			[
 										["Termino", "ExpEnteraSRI"]
 									,	["Termino"]
@@ -93,7 +111,7 @@ GRAMATICA
 									,	["+", "Termino"]
 									,	["-", "Termino"]
 									]
-		/*
+		/*	Recursiva izquierda
 		,	"Termino":				[
 										["Termino", "*", "Factor"]
 									,	["Factor"]
@@ -112,7 +130,7 @@ GRAMATICA
 									,	["ConstanteEntera"]
 									,	["NombreVariable"]
 									]
-		/*
+		/*	Recursiva izquierda
 		,	"ExpLogica":		[
 									["ExpLogica", "O", "OperandoLogico"]
 								,	["OperandoLogico"]
@@ -126,7 +144,7 @@ GRAMATICA
 										["O", "OperandoLogico", "ExpLogicaSRI"],
 										["O", "OperandoLogico"]
 									]
-		/*
+		/*	Recursiva izquierda
 		,	"OperandoLogico":	[
 									["OperandoLogico", "Y", "FactorLogico"]
 								,	["FactorLogico"]

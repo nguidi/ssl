@@ -9,7 +9,7 @@ function lexer(cadenaDeEntrada)
 	=	new RegExp(/\b(entero|real|logica)\b/)
 	//	Expresion regular para las constantes enteras
 	,	constanteEntera
-	=	new RegExp(/\d+/g)
+	=	new RegExp(/\d+/)
 	//	Expresion regular para las constantes logicas
 	,	constanteLogica
 	=	new RegExp(/\b(VERDADERO|FALSO)\b/)
@@ -65,6 +65,7 @@ function lexer(cadenaDeEntrada)
 						||	simbolosTerminales.test(preToken)
 						||	operadorLogico.test(preToken)
 						||	operadorAritmetico.test(preToken)
+						||	(preToken == '<' || preToken == '>')
 						)
 					?	'<'+preToken+'>'
 					:	tipoDeDato.test(preToken)

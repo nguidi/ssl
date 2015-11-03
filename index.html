@@ -19,7 +19,7 @@
 			}
 			pre {
 				height: 390px;
-				margin: 0;
+				margin: 0px;
 			}
 			.highlight {
 				margin-bottom: 0px;
@@ -29,6 +29,9 @@
 			}
 			.panel-body textarea {
 				height: 366px;
+			}
+			p#estadoADSR {
+				margin: 10px 0px 0px;
 			}
 		</style>
 	</head>
@@ -47,29 +50,18 @@
 						</div>
 						<div class="panel-body">
 							<textarea class="form-control" rows="3" id="entrada">
-entero a;
-entero b;
-entero s = a + b;
+x + 2;
+h + 3:
+z * 2;
+x + (h * z);
 
-entero Multiplicar(s) {
-   return s * 2;
-} 
+VERDADERO Y FALSO;
+NO VERDADERO;
+VERDADERO Y (NO FALSO);
 
-Si ( s >= 5 ) entonces {
-   s = Multiplicar(s);
-}
-
-logica x = FALSO;
-
-Si (VERDADERO == x) Y (FALSO == FALSO) {
-   logica = FALSO;
-}
-
-entero suma;
-
-Para s desde 0 hasta 10 {
-   suma = suma + s;
-}
+h > 3;
+(h - 3) == (n +2);
+2 <= 2;
 							</textarea>
 							<button class="btn btn-primary pull-right" id="analizar">Analizar</button>
 						</div>
@@ -100,6 +92,7 @@ Para s desde 0 hasta 10 {
 						</div>
 						<div class="panel-body">
 							<xmp id="salidaSinFormato" class="well"></xmp>
+							<p id="estadoADSR"></p>
 						</div>
 					</div>
 				</div>

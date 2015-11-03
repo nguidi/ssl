@@ -30,13 +30,11 @@ function procedimiento(noTerminal) {
 	do {
 		
 		ERROR = false;
-
 		procesar(producciones[i]);
-	
 		i++;
 		
 	} while (ERROR && (i < producciones.length));
-
+	
 }
 
 //	Funcion procesar del algoritmo ADSR
@@ -45,7 +43,6 @@ function procesar(produccion) {
 	var punteroRetroceso = PUNTERO;
 
 	for	(var i = 0; (i < produccion.length) && !ERROR; i++) {
-
 		switch(tipoDeCaracter(produccion[i])) {
 
 			case TERMINAL:
