@@ -20,7 +20,7 @@ function tipoDeCaracter(caracter) {
 }
 
 //	Funcion procedimiento del algoritmo ADSR
-function procedimiento(noTerminal) {
+function procedimiento(noTerminal, cadena) {
 
 	//	Producciones del no terminal pasado como argumento (solo parte derecha)
 	var producciones = obtenerProducciones(noTerminal);
@@ -30,7 +30,7 @@ function procedimiento(noTerminal) {
 	do {
 		
 		ERROR = false;
-		procesar(producciones[i]);
+		procesar(producciones[i], cadena);
 		i++;
 		
 	} while (ERROR && (i < producciones.length));
@@ -38,7 +38,7 @@ function procedimiento(noTerminal) {
 }
 
 //	Funcion procesar del algoritmo ADSR
-function procesar(produccion) {
+function procesar(produccion, cadena) {
 
 	var punteroRetroceso = PUNTERO;
 
@@ -46,13 +46,13 @@ function procesar(produccion) {
 		switch(tipoDeCaracter(produccion[i])) {
 
 			case TERMINAL:
-				if	(CADENA[PUNTERO] == produccion[i])
+				if	(cadena[PUNTERO] == produccion[i])
 					PUNTERO++;
 				else
 					ERROR = true;
 				break;
 			case NO_TERMINAL:
-				procedimiento(produccion[i]);
+				procedimiento(produccion[i], cadena);
 				break;
 		}
 
@@ -68,13 +68,12 @@ function adsr(cadena){
 	//	Inicializacion
 	ERROR	=	false;
 	PUNTERO	=	0;
-	CADENA	=	cadena
-	CADENA.push(FIN_DE_CADENA)
+	cadena.push(FIN_DE_CADENA);
 
 	//	Corro la funcion procedimiento para el simbolo distinguido
-	procedimiento(GRAMATICA.SIMBOLO_DISTINGUIDO);
+	procedimiento(GRAMATICA.SIMBOLO_DISTINGUIDO,cadena);
 
 	//	Devuelvo si la cadena pertenece o no al lenguaje
-	return (!ERROR && CADENA[PUNTERO] == FIN_DE_CADENA);
+	return (!ERROR && cadena[PUNTERO] == FIN_DE_CADENA);
 
 }
